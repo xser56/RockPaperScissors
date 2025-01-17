@@ -10,13 +10,13 @@ let chosenRPSLS = document.getElementById("chosenRPSLS");
 let roundWinner = document.getElementById("roundWinner");
 
 // Buttons
-rockButton.addEventListener("click", () => playGame("rock"));
-paperButton.addEventListener("click", () => playGame("paper"));
-scissorsButton.addEventListener("click", () => playGame("scissors"));
-lizardButton.addEventListener("click", () => playGame("lizard"));
-spockButton.addEventListener("click", () => playGame("spock"));
+rockButton.addEventListener("click", () => gameplay("rock"));
+paperButton.addEventListener("click", () => gameplay("paper"));
+scissorsButton.addEventListener("click", () => gameplay("scissors"));
+lizardButton.addEventListener("click", () => gameplay("lizard"));
+spockButton.addEventListener("click", () => gameplay("spock"));
 
-function playGame(playerChoice) 
+function gameplay(playerChoice) 
 {
     const choices = ["rock", "paper", "scissors", "lizard", "spock"];
     const computerChoice = choices[Math.floor(Math.random() * choices.length)]; // api here
@@ -36,15 +36,19 @@ function playGame(playerChoice)
     } 
     else if (winConditions[playerChoice].includes(computerChoice)) 
     {
-        // window.location.href = "win.html";
-        console.log(`You chose ${playerChoice}. CPU chose ${computerChoice}. Congratulations! You are triumphant!`);
+        console.log(`You chose ${playerChoice}. CPU chose ${computerChoice}. You win!`);
+        // "Player"
     } 
     else 
     {
-        // window.location.href = "lose.html";
-        console.log(`You chose ${playerChoice}. CPU chose ${computerChoice}. How unfortunate! You have been defeated!`);
+        console.log(`You chose ${playerChoice}. CPU chose ${computerChoice}. CPU wins!`);
+        // innerHTML. counter, ChosenRPSLS, roundWinner
     }
 }
+
+// if player 1 wins relocate to you win page
+// else CPU wins relocate to you lose page
+// 
 
 // Api
 // async function getAPI()
