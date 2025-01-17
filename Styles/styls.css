@@ -1,15 +1,20 @@
-body
+body 
 {
     background-image: url(../assets/RockPaperSpock.webp);
-    background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+    color: #f0e68c;
+    background-repeat:no-repeat;
     background-size: cover;
-    font-family: serif;
 }
 
-
-.background-main
+.container
 {
-    background-color:rgba(0, 0, 0, 0.473);
-    border-radius: 1rem;
-    height:;
+    background-color: #00000034;
+}
+
+h1 
+{
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px #000;
 }
