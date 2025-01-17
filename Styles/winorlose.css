@@ -1,0 +1,13 @@
+.winloseBtnContainer
+{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5rem;
+}
+
+.playAgainBtn
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 40rem;   
+}

@@ -18,18 +18,20 @@ let cpuRPSLS = document.getElementById("cpuRPSLS");
 
 let playerCounter = document.getElementById("playerCounter");
 let userCounter = document.getElementById("userCounter");
+let gameRounds = document.getElementById("gameRounds")
 let roundWinner = document.getElementById("roundWinner");
 
 
 //Score tracker
 let playerScore = 1;
 let cpuScore = 1;
+let rounds = 7;
+
 
 async function gameplay(playerChoice) 
 {
     const grabApi = await getAPI(); 
     const computerChoice = grabApi.toLowerCase().trim();
-
     const winConditions = 
     {
         rock: ["scissors", "sizard"],
@@ -43,7 +45,6 @@ async function gameplay(playerChoice)
 
     if (winConditions[playerChoice].includes(computerChoice)) 
         {       
-            cpuScore++;
             roundWinner.innerHTML = `<span style="color: green;">You win this round!</span>`;
             playerCounter.innerHTML = playerScore++;
         } 
@@ -56,21 +57,18 @@ async function gameplay(playerChoice)
             cpuCounter.innerHTML = cpuScore++;
             roundWinner.innerHTML = `<span style="color: red;">CPU wins this round!</span>`;
         }
-        
+
     // Counter
-    if (playerScore === 10) 
+    if (playerScore === 4) 
     {
-        // .displayblock syntax turn off page = you win page
-        // Move to You win page; 
+        location.replace("../pages/pageWin.html")
     } 
-    else if (cpuScore === 10) 
+    else if (cpuScore === 4) 
     {
-        // .displayblock syntax turn off page = you lose page
-        // Move to you lose page
+        location.replace("../pages/pageLose.html")
     }    
 }
     
-// if gamemode1()
 // Api
 async function getAPI()
 {
@@ -79,4 +77,5 @@ async function getAPI()
     console.log(data);
     return data;
 }
-getAPI();
+
+export {gameplay}
