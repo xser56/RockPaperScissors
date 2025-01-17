@@ -1,3 +1,4 @@
+// Buttons
 let intructionsButton = document.getElementById("intructionsButton");
 let rockButton = document.getElementById("rockButton");
 let paperButton = document.getElementById("paperButton");
@@ -5,57 +6,77 @@ let scissorsButton = document.getElementById("scissorsButton");
 let lizardButton = document.getElementById("lizardButton");
 let spockButton = document.getElementById("spockButton");
 
-let counter = document.getElementById("counter");
-let chosenRPSLS = document.getElementById("chosenRPSLS");
-let roundWinner = document.getElementById("roundWinner");
-
-// Buttons
 rockButton.addEventListener("click", () => gameplay("rock"));
 paperButton.addEventListener("click", () => gameplay("paper"));
 scissorsButton.addEventListener("click", () => gameplay("scissors"));
 lizardButton.addEventListener("click", () => gameplay("lizard"));
 spockButton.addEventListener("click", () => gameplay("spock"));
 
-function gameplay(playerChoice) 
+// Dom
+let userRPSLS = document.getElementById("userRPSLS");
+let cpuRPSLS = document.getElementById("cpuRPSLS");
+
+let playerCounter = document.getElementById("playerCounter");
+let userCounter = document.getElementById("userCounter");
+let roundWinner = document.getElementById("roundWinner");
+
+
+//Score tracker
+let playerScore = 1;
+let cpuScore = 1;
+
+async function gameplay(playerChoice) 
 {
-    const choices = ["rock", "paper", "scissors", "lizard", "spock"];
-    const computerChoice = choices[Math.floor(Math.random() * choices.length)]; // api here
+    const grabApi = await getAPI(); 
+    const computerChoice = grabApi.toLowerCase().trim();
 
     const winConditions = 
     {
-        rock: ["scissors", "lizard"],
+        rock: ["scissors", "sizard"],
         paper: ["rock", "spock"],
         scissors: ["paper", "lizard"],
         lizard: ["paper", "spock"],
-        spock: ["rock", "scissors"]
+        spock: ["pock", "scissors"]
     };
 
-    if (playerChoice === computerChoice) 
+    userRPSLS.innerHTML = `You chose: [${playerChoice}] CPU chose: [${computerChoice}]`;
+
+    if (winConditions[playerChoice].includes(computerChoice)) 
+        {       
+            cpuScore++;
+            roundWinner.innerHTML = `<span style="color: green;">You win this round!</span>`;
+            playerCounter.innerHTML = playerScore++;
+        } 
+        else if (playerChoice === computerChoice) 
+        {
+            roundWinner.innerHTML = `<span style="color: yellow;">What!? You two tied! Go again!!</span>`;
+        } 
+        else  
+        {         
+            cpuCounter.innerHTML = cpuScore++;
+            roundWinner.innerHTML = `<span style="color: red;">CPU wins this round!</span>`;
+        }
+        
+    // Counter
+    if (playerScore === 10) 
     {
-        console.log(`You chose ${playerChoice}. CPU chose ${computerChoice}. What!? You two tied! Go again!`);
+        // .displayblock syntax turn off page = you win page
+        // Move to You win page; 
     } 
-    else if (winConditions[playerChoice].includes(computerChoice)) 
+    else if (cpuScore === 10) 
     {
-        console.log(`You chose ${playerChoice}. CPU chose ${computerChoice}. You win!`);
-        // "Player"
-    } 
-    else 
-    {
-        console.log(`You chose ${playerChoice}. CPU chose ${computerChoice}. CPU wins!`);
-        // innerHTML. counter, ChosenRPSLS, roundWinner
-    }
+        // .displayblock syntax turn off page = you lose page
+        // Move to you lose page
+    }    
 }
-
-// if player 1 wins relocate to you win page
-// else CPU wins relocate to you lose page
-// 
-
+    
+// if gamemode1()
 // Api
-// async function getAPI()
-// {
-//     const response = await fetch(`https://rockpaperscissors-dhe0fsbvb5d4h7a0.westus-01.azurewebsites.net/RockPaperScissors/BeginGame`);
-//     const data = await response
-//     console.log(data);
-//     return data;
-// }
-// getAPI();
+async function getAPI()
+{
+    const response = await fetch(`https://asrockpaperscissors-fad8ckb6e0bcfue8.westus-01.azurewebsites.net/RockPaperScissors/beginGame`);
+    const data = await response.text();
+    console.log(data);
+    return data;
+}
+getAPI();
