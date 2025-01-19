@@ -8,19 +8,45 @@
     <link rel="stylesheet" href="./Styles/styls.css">
   </head>
   <body>
-    <div class="container background-main mt-5 pt-4">
-        <div class="d-flex justify-content-center">
-            <h1>Welcome To Rock Paper Scissors Lizard Spock!</h1>
-        </div>
-        <div class="d-flex justify-content-center">
-        <h2>Rock, Paper, Scissors, Lizard, Spock is an extended version of the classic game Rock, Paper, Scissors that adds two more options: Lizard and Spock. This makes the game more exciting and reduces the chances of a tie! </h2>
-        </div>
-        
-        <h3>Go head to head against the computer and see if you have what it takes to defeat machine itself!</h3>
-        <h3>Challenge friend or foe in an intense one on one game!</h3>
-     
-      <div id="result"></div>
+
+    <div class="container ">
+      <header class="header pb-5">
+          <h1>Welcome To<br>Rock Paper Scissors Lizard Spock!</h1>
+      </header>
+      <div class="content">
+          <div class="game-description">
+              <h2>Rock, Paper, Scissors, Lizard, Spock!</h2>
+              <p>
+                  An extended version of the classic game Rock, Paper, Scissors that adds
+                  two more options: Lizard and Spock. This makes the game more exciting and reduces
+                  the chances of a tie!
+              </p>
+          </div>
+          <div class="game-modes">
+              <h1>Game Modes:</h1>
+              <button id="goToCpu">Go head to head against the computer</button>
+              <button id="goToPvp">Challenge friend or foe in an intense one on one game!</button>
+          </div>
+      </div>
+  </div>
+  <!-- Cpu -->
+  <div class="container" style="display: none;" id="hideBestOfCpu">
+    <h2>Choose Game Rounds CPU:</h2>
+    <div class="col d-flex justify-content-evenly background pt-5">
+      <button class="content" id="cpu1">Single Round</button>
+      <button class="content" id="cpu2">Best out of 3</button>
+      <button class="content" id="cpu3">Best out of 4</button>
     </div>
+  </div>
+  <!-- PvP -->
+  <div class="container" style="display: none;" id="hideBestOfPvp">
+    <h2>Choose Game Rounds PvP:</h2>
+    <div class="col d-flex justify-content-evenly background pt-5">
+      <button class="content" id="pvp1">Single Round</button>
+      <button class="content" id="pvp2">Best out of 3</button>
+      <button class="content" id="pvp3">Best out of 4</button>
+    </div>
+  </div>
 
     <script src="./scripts/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -1,0 +1,113 @@
+// Buttons
+let intructionsButton = document.getElementById("intructionsButton");
+let rockButton = document.getElementById("rockButton");
+let paperButton = document.getElementById("paperButton");
+let scissorsButton = document.getElementById("scissorsButton");
+let lizardButton = document.getElementById("lizardButton");
+let spockButton = document.getElementById("spockButton");
+
+// DOM Elements
+let userRPSLS = document.getElementById("userRPSLS");
+let roundWinner = document.getElementById("roundWinner");
+let player1Counter = document.getElementById("player1Count");
+let player2Counter = document.getElementById("player2Count");
+
+rockButton.addEventListener("click", () => handlePlayerChoice("rock"));
+paperButton.addEventListener("click", () => handlePlayerChoice("paper"));
+scissorsButton.addEventListener("click", () => handlePlayerChoice("scissors"));
+lizardButton.addEventListener("click", () => handlePlayerChoice("lizard"));
+spockButton.addEventListener("click", () => handlePlayerChoice("spock"));
+
+// Rounds
+let gameMatchType = localStorage.getItem("gameMatchType");
+let roundsToWin;
+
+if (gameMatchType === "singleRound") 
+{
+  roundsToWin = 1;
+} 
+else if (gameMatchType === "bestOf3") 
+{
+  roundsToWin = 3; 
+} 
+else if (gameMatchType === "bestOf4") 
+{
+  roundsToWin = 4; 
+} 
+
+let player1Score = 0;
+let player2Score = 0;
+
+const winConditions = 
+{
+    rock: ["scissors", "lizard"],
+    paper: ["rock", "spock"],
+    scissors: ["paper", "lizard"],
+    lizard: ["paper", "spock"],
+    spock: ["rock", "scissors"],
+};
+
+let currentPlayer = 1;
+let player1Choice = ""; 
+
+function playerTurns(choice) 
+{
+    if (currentPlayer === 1) 
+    {
+        player1Choice = choice;
+        userRPSLS.innerHTML = `Player 1 chose: [${choice}]`;
+
+        currentPlayer = 2; 
+        roundWinner.innerHTML = `Player 2, it's your turn!`;
+    } 
+    else if (currentPlayer === 2) 
+    {
+        let player2Choice = choice;
+        userRPSLS.innerHTML += `<br>Player 2 chose: [${player2Choice}]`;
+
+        roundWinner(player1Choice, player2Choice);
+        currentPlayer = 1; // Switch back to Player 1
+        roundWinner.innerHTML = `Player 1, it's your turn!`;
+    }
+}
+
+// Determine Round Winner
+function rounderwinner(player1Choice, player2Choice) 
+{
+    if (winConditions[player1Choice].includes(player2Choice)) 
+    {
+        roundWinner.innerHTML = `<span style="color: green;">Player 1 wins this round!</span>`;
+        player1Score++;
+        playerCounter.innerHTML = player1Score;
+    } 
+    else if (winConditions[player2Choice].includes(player1Choice)) 
+    {
+        roundWinner.innerHTML = `<span style="color: red;">Player 2 wins this round!</span>`;
+        player2Score++;
+        cpuCounter.innerHTML = player2Score;
+    } 
+    else 
+    {
+        roundWinner.innerHTML = `<span style="color: yellow;">It's a tie! Go again!</span>`;
+    }
+
+  checkForWinner();
+}
+
+function checkForWinner() 
+{
+    if (player1Score >= roundsToWin) 
+    {
+        setTimeout(() => 
+        {
+            location.replace("../pages/pageWin.html");
+        }, 3000);
+    } 
+    else if (player2Score >= roundsToWin) 
+    {
+        setTimeout(() => 
+        {
+            location.replace("../pages/pageLose.html");
+        }, 3000);
+     }
+}
